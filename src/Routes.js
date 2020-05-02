@@ -8,10 +8,10 @@ import AddContacts from './components/AddContacts';
 
 export default () => (
   <Router navigationBarStyle={{ backgroundColor: '#115E54' }} titleStyle={{ color: '#fff' }}>
-    <Scene key="formLogin" component={FormLogin} title="Login" hideNavBar={true} />
+    <Scene key="formLogin" component={FormLogin} title="Login" initial hideNavBar={true} />
     <Scene key="formSignIn" component={FormSignIn} title="Cadastro" hideNavBar={false} />
     <Scene key="welcome" component={Welcome} title="Seja Bem-Vindo" hideNavBar={true} />
-    <Scene key="main" component={Main} initial title="Principal" hideNavBar={true} />
+    <Scene key="main" component={Main} title="Principal" hideNavBar={true} />
     <Scene key="addContacts" component={AddContacts} title="Adicionar Contatos" hideNavBar={false} />
   </Router>
 );

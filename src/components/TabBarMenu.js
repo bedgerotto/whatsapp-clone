@@ -2,8 +2,10 @@ import React from 'react';
 import { View, Text, StatusBar, Image, TouchableHighlight } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
 import { Actions } from 'react-native-router-flux';
+import { resetAddContactStatus } from '../actions/AppActions';
+import { connect } from 'react-redux';
 
-export default props => (
+const TabBarMenu = props => (
   <View style={{ backgroundColor: '#115E54', elevation: 4, marginBottom: 6 }}>
     <StatusBar backgroundColor="#114D44" />
 
@@ -15,7 +17,10 @@ export default props => (
       <View style={{ flexDirection: 'row', marginRight: 20 }}>
         <View style={{ justifyContent: 'center', width: 50, alignItems: 'center' }}>
           <TouchableHighlight
-            onPress={() => (Actions.addContacts())}
+            onPress={() => {
+              Actions.addContacts();
+              props.resetAddContactStatus();
+            }}
             underlayColor="#114D44"
           >
             <Image source={require('../images/add.png')} />
@@ -30,3 +35,5 @@ export default props => (
     <TabBar {...props} style={{ backgroundColor: '#115E54', elevation: 0 }} />
   </View>
 );
+
+export default connect(null, { resetAddContactStatus })(TabBarMenu);

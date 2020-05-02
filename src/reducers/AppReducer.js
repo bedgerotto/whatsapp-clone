@@ -1,19 +1,23 @@
 import {
-  CHANGE_EMAIL,
-  ADD_CONTACT_ERROR
+  CHANGE_CONTACT_EMAIL,
+  ADD_CONTACT_ERROR,
+  ADD_CONTACT_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATES = {
-  email: '',
-  contact_error: ''
+  contactEmail: '',
+  contactError: '',
+  addContactSuccess: false
 };
 
 export default (state = INITIAL_STATES, action) => {
   switch (action.type) {
-    case CHANGE_EMAIL:
-      return { ...state, email: action.payload };
+    case CHANGE_CONTACT_EMAIL:
+      return { ...state, contactEmail: action.payload };
     case ADD_CONTACT_ERROR:
-      return { ...state, contact_error: action.payload };
+      return { ...state, contactError: action.payload };
+    case ADD_CONTACT_SUCCESS:
+      return { ...state, addContactSuccess: action.payload, contactEmail: '' };
     default:
       return state;
   }

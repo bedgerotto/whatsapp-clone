@@ -51,6 +51,7 @@ class FormLogin extends Component {
           </View>
           <View style={styles.formContent}>
             <TextInput
+              style={{ height: 45, fontSize: 20 }}
               value={this.props.email}
               placeholder="E-mail"
               placeholderTextColor="#fff"
@@ -107,10 +108,6 @@ const styles = StyleSheet.create({
   formContent: {
     flex: 2
   },
-  formInput: {
-    fontSize: 20,
-    height: 45
-  },
   formText: {
     fontSize: 20,
     color: '#fff'
@@ -130,6 +127,8 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 0,
+    height: 45,
+    fontSize: 20
   },
   passwordIcon: {
     padding: 10,
