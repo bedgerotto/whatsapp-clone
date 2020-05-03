@@ -7,7 +7,8 @@ import {
   ADD_CONTACT,
   ADD_CONTACT_ERROR,
   ADD_CONTACT_SUCCESS,
-  USER_CONTACT_LIST
+  USER_CONTACT_LIST,
+  CHANGE_MESSAGE
 } from './types';
 
 export const changeEmail = text => (
@@ -64,13 +65,18 @@ const addContactError = (error, dispatch) => (
 
 export const fetchUserContacts = () => {
   const { currentUser } = firebase.auth();
-
   return dispatch => {
     const currentUserEncoded = b64.encode(currentUser.email);
-
-    firebase.database().ref(`contact_users/${currentUserEncoded}`)
-      .on('value', (snapshot) => (
-        dispatch({ type: USER_CONTACT_LIST, payload: snapshot.val() })
-      ));
+    firebase.database().ref(`user_contacts/${currentUserEncoded}`)
+      .on('value', (snapshot) => {
+        dispatch({ type: USER_CONTACT_LIST, payload: snapshot.val() });
+      });
   };
 };
+
+export const changeMessage = (message) => (
+  {
+    type: CHANGE_MESSAGE,
+    payload: message
+  }
+);

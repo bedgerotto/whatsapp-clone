@@ -10,8 +10,8 @@ export default class Main extends Component {
   state = {
     index: 0,
     routes: [
-      { key: '1', title: 'First' },
-      { key: '2', title: 'Second' },
+      { key: '1', title: 'Conversas' },
+      { key: '2', title: 'Contatos' },
     ],
   };
 

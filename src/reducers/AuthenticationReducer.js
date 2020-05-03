@@ -13,8 +13,8 @@ import {
 
 const INITIAL_STATES = {
   name: '',
-  email: '',
-  password: '',
+  email: 'bedgerotto@gmail.com',
+  password: '123456',
   securePassword: true,
   errorMessage: '',
   loginErrorMessage: '',
