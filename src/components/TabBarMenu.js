@@ -2,8 +2,10 @@ import React from 'react';
 import { View, Text, StatusBar, Image, TouchableHighlight } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
 import { Actions } from 'react-native-router-flux';
-import { resetAddContactStatus } from '../actions/AppActions';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
+
+import { resetAddContactStatus } from '../actions/AppActions';
 
 const TabBarMenu = props => (
   <View style={{ backgroundColor: '#115E54', elevation: 4, marginBottom: 6 }}>
@@ -27,7 +29,11 @@ const TabBarMenu = props => (
           </TouchableHighlight>
         </View>
         <View style={{ justifyContent: 'center' }}>
-          <Text style={{ color: '#fff', fontSize: 20 }}>Sair</Text>
+          <TouchableHighlight
+            onPress={() => (firebase.auth().signOut().then(() => Actions.formLogin()))}
+          >
+            <Text style={{ color: '#fff', fontSize: 20 }}>Sair</Text>
+          </TouchableHighlight>
         </View>
       </View>
     </View>

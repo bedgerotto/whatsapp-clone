@@ -14,3 +14,6 @@ export const ADD_CONTACT_ERROR = 'add_contact_error';
 export const ADD_CONTACT_SUCCESS = 'add_contact_success';
 export const USER_CONTACT_LIST = 'user_contact_list';
 export const CHANGE_MESSAGE = 'change_message';
+export const FETCH_MESSAGES = 'fetch_messages';
+export const MESSAGE_SENDED = 'message_sended';
+export const FETCH_CHATS = 'fetch_chats';

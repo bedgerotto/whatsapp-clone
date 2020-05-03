@@ -22,12 +22,16 @@ class Contacts extends Component {
     this.dataSource = dataSource.cloneWithRows(contacts);
   }
 
-  rowTemplate(data) {
+  rowTemplate(contact) {
     return (
-      <TouchableHighlight onPress={() => Actions.chat()}>
+      <TouchableHighlight
+        onPress={() => (Actions.chat({
+          title: contact.name, contactName: contact.name, contactEmail: contact.email
+        }))}
+      >
         <View style={{ flex: 1, padding: 20, borderBottomWidth: 1, borderColor: '#CCC' }}>
-          <Text style={{ fontSize: 25 }}>{data.name}</Text>
-          <Text style={{ fontSize: 18 }}>{data.email}</Text>
+          <Text style={{ fontSize: 25 }}>{contact.name}</Text>
+          <Text style={{ fontSize: 18 }}>{contact.email}</Text>
         </View>
       </TouchableHighlight>
     );

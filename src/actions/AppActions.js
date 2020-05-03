@@ -8,7 +8,10 @@ import {
   ADD_CONTACT_ERROR,
   ADD_CONTACT_SUCCESS,
   USER_CONTACT_LIST,
-  CHANGE_MESSAGE
+  CHANGE_MESSAGE,
+  FETCH_MESSAGES,
+  MESSAGE_SENDED,
+  FETCH_CHATS
 } from './types';
 
 export const changeEmail = text => (
@@ -80,3 +83,61 @@ export const changeMessage = (message) => (
     payload: message
   }
 );
+
+export const sendMessage = (message, contactName, contactEmail) => {
+  const { currentUser } = firebase.auth();
+  const userEmailb64 = b64.encode(currentUser.email);
+  const contactEmailb64 = b64.encode(contactEmail);
+
+
+  return dispatch => {
+    firebase.database().ref(`/messages/${userEmailb64}/${contactEmailb64}`)
+      .push({ message, type: 's' })
+      .then(() => {
+        firebase.database().ref(`/messages/${contactEmailb64}/${userEmailb64}`)
+          .push({ message, type: 'r' })
+          .then(() => dispatch(
+            { type: MESSAGE_SENDED }
+          ));
+      })
+      .then(() => {
+        firebase.database().ref(`user_chats/${userEmailb64}/${contactEmailb64}`)
+          .set({ name: contactName, email: contactEmail });
+      })
+      .then(() => {
+        firebase.database().ref(`contacts/${userEmailb64}`)
+          .once('value')
+          .then((snapshot) => {
+            const data = _.first(_.values(snapshot.val()));
+
+            firebase.database().ref(`user_chats/${contactEmailb64}/${userEmailb64}`)
+              .set({ name: data.name, email: currentUser.email });
+          });
+      });
+  };
+};
+
+export const fetchMessages = (contactEmail) => {
+  const { currentUser } = firebase.auth();
+  const userEmailb64 = b64.encode(currentUser.email);
+  const contactEmailb64 = b64.encode(contactEmail);
+
+  return dispatch => {
+    firebase.database().ref(`/messages/${userEmailb64}/${contactEmailb64}`)
+      .on('value', (snapshot) => {
+        dispatch({ type: FETCH_MESSAGES, payload: snapshot.val() });
+      });
+  };
+};
+
+export const fetchChats = () => {
+  const { currentUser } = firebase.auth();
+  const userEmailb64 = b64.encode(currentUser.email);
+
+  return dispatch => {
+  firebase.database().ref(`/user_chats/${userEmailb64}`)
+    .on('value', (snapshot) => {
+      dispatch({ type: FETCH_CHATS, payload: snapshot.val() });
+    });
+  };
+}

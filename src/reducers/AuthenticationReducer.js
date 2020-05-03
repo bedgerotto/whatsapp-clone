@@ -13,8 +13,8 @@ import {
 
 const INITIAL_STATES = {
   name: '',
-  email: 'bedgerotto@gmail.com',
-  password: '123456',
+  email: '',
+  password: '',
   securePassword: true,
   errorMessage: '',
   loginErrorMessage: '',
@@ -36,7 +36,7 @@ export default (state = INITIAL_STATES, action) => {
     case SINGIN_SUCCESS:
       return { ...state, name: '', password: '', errorMessage: '', processing_signin: false };
     case LOGIN_SUCCESSFUL:
-      return { ...state, processing_login: false };
+      return { ...state, ...INITIAL_STATES };
     case LOGIN_FAILED:
       return { ...state, loginErrorMessage: action.payload, processing_login: false };
     case PROCESSING_LOGIN:
