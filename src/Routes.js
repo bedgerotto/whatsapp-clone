@@ -8,7 +8,7 @@ import AddContacts from './components/AddContacts';
 import Chat from './components/Chat';
 
 export default () => (
-  <Router navigationBarStyle={{ backgroundColor: '#115E54' }} titleStyle={{ color: '#fff' }}>
+  <Router navigationBarStyle={{ backgroundColor: '#115E54' }} titleStyle={{ color: '#fff' }} leftButtonIconStyle={{ tintColor: '#fff' }} >
     <Scene key="formLogin" component={FormLogin} title="Login" initial hideNavBar={true} />
     <Scene key="formSignIn" component={FormSignIn} title="Cadastro" hideNavBar={false} />
     <Scene key="welcome" component={Welcome} title="Seja Bem-Vindo" hideNavBar={true} />

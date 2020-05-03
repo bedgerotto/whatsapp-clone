@@ -73,7 +73,7 @@ class FormLogin extends Component {
               </TouchableHighlight>
             </View>
             <Text style={styles.loginErrorMessage}>{this.props.loginErrorMessage}</Text>
-            <TouchableHighlight onPress={() => { Actions.formSignIn(); }} >
+            <TouchableHighlight onPress={() => { Actions.formSignIn(); }} underlayColor="#114D44" >
               <Text style={styles.formText}>Ainda não tem cadastro? Cadastre-se</Text>
             </TouchableHighlight>
           </View>
